@@ -2,24 +2,35 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Toggle from './Option/Toggle';
+import styles from './Option/Toggle.module.css'
+import TogglesSet from './Option/TogglesSet';
+
 function App() {
+  const getParam = (param_name:string) => {
+    const URLParams = new URLSearchParams(window.location.search);
+    console.log(URLParams.values());
+    return URLParams.get(param_name);
+  }
+  const SWITCHES = [
+    {
+      text: getParam("t1") || "Fast",
+      color:styles.blue
+    },
+    {
+      text: getParam("t2") || "Good",
+      color:styles.green
+    },
+    {
+      text: getParam("t3") ||"Cheap",
+      color:styles.red
+    }];  
+  
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TogglesSet SWITCHES={SWITCHES}/>
+    </>
   );
 }
 
